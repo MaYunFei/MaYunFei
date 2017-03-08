@@ -1,0 +1,809 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Small,插件化,Android进阶," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Library 创建&amp;nbsp;&amp;nbsp;上一次我创建了宿主App，和 Main模块，这次添加一个Library,我准备添加一个网络请求的 Library
+Adnroid Studio 直接创建 Module 选择 Android Library
+Application/Library name: Lib.networkModule domain: lib.networkPackage name">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Small 插件化使用(2)创建lib.network,lib.style">
+<meta property="og:url" content="http://MaYunFei.github.io/2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/index.html">
+<meta property="og:site_name" content="YunFei's Android">
+<meta property="og:description" content="Library 创建&amp;nbsp;&amp;nbsp;上一次我创建了宿主App，和 Main模块，这次添加一个Library,我准备添加一个网络请求的 Library
+Adnroid Studio 直接创建 Module 选择 Android Library
+Application/Library name: Lib.networkModule domain: lib.networkPackage name">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170104148351004830323.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170104148351033132225.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170104148352139069703.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20161230148306789118214.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170106148367129685645.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170106148367134139165.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170104148352139069703.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170106148367165339412.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170106148367165339412.jpg?imageView2/0/format/jpg">
+<meta property="og:image" content="http://ofi52yvuh.bkt.clouddn.com/20170106148367223576658.jpg?imageView2/0/format/jpg">
+<meta property="og:updated_time" content="2017-03-08T16:19:42.134Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Small 插件化使用(2)创建lib.network,lib.style">
+<meta name="twitter:description" content="Library 创建&amp;nbsp;&amp;nbsp;上一次我创建了宿主App，和 Main模块，这次添加一个Library,我准备添加一个网络请求的 Library
+Adnroid Studio 直接创建 Module 选择 Android Library
+Application/Library name: Lib.networkModule domain: lib.networkPackage name">
+<meta name="twitter:image" content="http://ofi52yvuh.bkt.clouddn.com/20170104148351004830323.jpg?imageView2/0/format/jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://MaYunFei.github.io/2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/"/>
+
+
+
+
+
+  <title> Small 插件化使用(2)创建lib.network,lib.style | YunFei's Android </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">YunFei's Android</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">临渊羡鱼，不如退而结网</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://MaYunFei.github.io/2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="YunFei">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="YunFei's Android">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="YunFei's Android" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Small 插件化使用(2)创建lib.network,lib.style
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-06T13:57:38+00:00">
+                2017-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Library-创建"><a href="#Library-创建" class="headerlink" title="Library 创建"></a>Library 创建</h2><p>&nbsp;&nbsp;上一次我创建了宿主<code>App</code>，和 <code>Main</code>模块，这次添加一个<code>Library</code>,我准备添加一个网络请求的 <code>Library</code></p>
+<p><code>Adnroid Studio</code> 直接创建 <code>Module</code> 选择 <code>Android Library</code><br><img src="http://ofi52yvuh.bkt.clouddn.com/20170104148351004830323.jpg?imageView2/0/format/jpg" alt="jpg"></p>
+<p><code>Application/Library name:</code> Lib.network<br><code>Module domain:</code> lib.network<br><code>Package name:</code> com.yunfei.gank.lib.network</p>
+<p><img src="http://ofi52yvuh.bkt.clouddn.com/20170104148351033132225.jpg?imageView2/0/format/jpg" alt="jpg"></p>
+<p>简单说一下，我配置的网络请求看 <code>gradle</code> 依赖如下，使用的是<code>retrofit</code> <code>rxjava</code> <code>gson</code> Server api <a href="http://gank.io/api" target="_blank" rel="external">http://gank.io/api</a></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">  <span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.1.0'</span></div><div class="line">  <span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.1.0'</span></div><div class="line">  <span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:adapter-rxjava:2.1.0'</span></div><div class="line">  <span class="keyword">compile</span> <span class="string">'com.squareup.okhttp3:logging-interceptor:3.5.0'</span></div><div class="line">  <span class="keyword">compile</span> <span class="string">'io.reactivex:rxandroid:1.2.1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我仅仅是添加了 <code>http</code> 请求最基础的功能，并没有添加与业务相关的具体代码 url 请求,也算是与业务隔离吧</p>
+<h2 id="与宿主APP-关联"><a href="#与宿主APP-关联" class="headerlink" title="与宿主APP 关联"></a>与宿主APP 关联</h2><p>直接修改宿主 App <code>assets</code>下的 <code>bundle.json</code> 添加</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="attr">"bundles"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"uri"</span>: <span class="string">"main"</span>,</div><div class="line">      <span class="attr">"pkg"</span>: <span class="string">"com.yunfei.gank.app.main"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"uri"</span>: <span class="string">"lib.network"</span>,</div><div class="line">      <span class="attr">"pkg"</span>: <span class="string">"com.yunfei.gank.lib.network"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果不添加的话，会报<code>Class not find</code> 错误</p>
+<h2 id="使用-Library"><a href="#使用-Library" class="headerlink" title="使用 Library"></a>使用 Library</h2><p>我们的 <code>main</code> 插件关联一下 <code>network</code> gradle 添加</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':lib.network'</span>)</div></pre></td></tr></table></figure>
+<p>首页实现一个列表功能 server api</p>
+<blockquote>
+<p>分类数据: <a href="http://gank.io/api/data/数据类型/请求个数/第几页" target="_blank" rel="external">http://gank.io/api/data/数据类型/请求个数/第几页</a></p>
+<p>数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all<br>请求个数： 数字，大于0<br>第几页：数字，大于0<br>例：<br><a href="http://gank.io/api/data/Android/10/1" target="_blank" rel="external">http://gank.io/api/data/Android/10/1</a><br><a href="http://gank.io/api/data/福利/10/1" target="_blank" rel="external">http://gank.io/api/data/福利/10/1</a><br><a href="http://gank.io/api/data/iOS/20/2" target="_blank" rel="external">http://gank.io/api/data/iOS/20/2</a><br><a href="http://gank.io/api/data/all/20/2" target="_blank" rel="external">http://gank.io/api/data/all/20/2</a></p>
+</blockquote>
+<p>当然剩下的都是业务关系了，我这里就不详细说了，看我写的代码吧，反正写的也不多🤣就是网络请求加载了一个列表<br>coding… 🤖<br>编写过程中可以单独编译运行一下 <strong>app.main</strong> ,插件化的好处体现了<br><img src="http://ofi52yvuh.bkt.clouddn.com/20170104148352139069703.jpg?imageView2/0/format/jpg" alt="jpg"></p>
+<p>终于到插件组合的时候了,对了先解决模拟器 x86的问题，上一篇博客说过，把宿主 app 中的<code>smallLibs</code>文件夹复制一份，改名为<code>x86</code>，其实你会发现这里多了一个<code>libcom_yunfei_gank_lib_network.so</code><br>clean 一下 ,build</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./gradlew clean</div><div class="line">./gradlew buildLib -q </div><div class="line">./gradlew buildBundle -q</div></pre></td></tr></table></figure>
+<p>命令行都成功后直接选择宿主 App 运行下看看 <img src="http://ofi52yvuh.bkt.clouddn.com/20161230148306789118214.jpg?imageView2/0/format/jpg" alt="jpg"></p>
+<p><strong>坑</strong>来了，并没有运行成功 报错了，是因为 com.yunfei.gank.app.main.MainActivity activity 没有 <code>toolbar</code> 的问题，并没有设置为 <code>NoActionBar</code> </p>
+<blockquote>
+<p>java.lang.RuntimeException: Unable to start activity ComponentInfo{com.yunfei.gank/com.yunfei.gank.app.main.MainActivity}: java.lang.IllegalStateException: This Activity already has an action bar supplied by the window decor. Do not request Window.FEATURE_SUPPORT_ACTION_BAR and set windowActionBar to false in your theme to use a Toolbar instead.</p>
+</blockquote>
+<p>填坑 – 说是填坑只是我因为我没有很好的看 demo 实例<br><del>这里我先 在 <code>AndroidManifest</code> 文件 显示配置 <code>Activity</code> 的 <code>theme</code> <code>android:theme=&quot;@style/AppTheme&quot;</code> 运行了一下，还是不行，只能改名字了，我给 <code>main</code> 模块theme 添加了一个前缀 <code>Main_AppTheme</code> 运行成功了</del></p>
+<p>这里应该有更好的解决方案，就是将 <code>Style</code> 单独做 <code>lib.style</code> 插件</p>
+<p><code>Application/Library name:</code> Lib.style<br><code>Module domain:</code> lib.style<br><code>Package name:</code> com.yunfei.gank.lib.style</p>
+<p>app.main 依赖 <code>compile project(&#39;:lib.style&#39;)</code>,把之前的<code>style</code>文件拷贝，<br>顺手把 app.main 中的 <code>styles.xml</code> 和 <code>colors.xml</code> 删除了</p>
+<p>再次运行 <code>RuntimeException</code> <code>You need to use a Theme.AppCompat theme</code>,引发这个原因真的是会有很多种，去看<a href="https://github.com/wequick/Small/issues?q=is%3Aissue+theme" target="_blank" rel="external">issues</a>就知道了，真的好多种，当然我经过一天的各种试还是成功了🙈，重要的事情说三遍啊，新建的<code>lib</code>/<code>app</code>一定要<strong>添加到<code>bundle.json</code>中</strong>，<strong>添加到<code>bundle.json</code>中</strong>，<strong>添加到<code>bundle.json</code>中！</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="attr">"bundles"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"uri"</span>: <span class="string">"main"</span>,</div><div class="line">      <span class="attr">"pkg"</span>: <span class="string">"com.yunfei.gank.app.main"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"uri"</span>: <span class="string">"lib.network"</span>,</div><div class="line">      <span class="attr">"pkg"</span>: <span class="string">"com.yunfei.gank.lib.network"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"uri"</span>: <span class="string">"lib.style"</span>,</div><div class="line">      <span class="attr">"pkg"</span>: <span class="string">"com.yunfei.gank.lib.style"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>终于跑成功了，顺便说一句在查issues时，觉的挺重要的</p>
+<blockquote>
+<p>作者为了插件最小化，Small默认不允许插件携带第三方资源，包含资源的第三方库必须在宿主里预定义。<br>后发现lib.*插件经常可能这么干，为了灵活性，加开该参数允许用户绕过。<br>就是这个参数<code>strictSplitResources = false</code></p>
+</blockquote>
+<h2 id="资源冲突？"><a href="#资源冲突？" class="headerlink" title="资源冲突？"></a>资源冲突？</h2><p>这次我们改一下插件的资源文件，手动做成和宿主<code>app</code>相同的名字不同值，看看会是什么结果</p>
+<ol>
+<li><code>color.xml</code><br> 宿主<code>app</code><br> <img src="http://ofi52yvuh.bkt.clouddn.com/20170106148367129685645.jpg?imageView2/0/format/jpg" alt="jpg"><br> <code>lib.style</code><br> <img src="http://ofi52yvuh.bkt.clouddn.com/20170106148367134139165.jpg?imageView2/0/format/jpg" alt="jpg"><br> 之前运行的结果<br> <img src="http://ofi52yvuh.bkt.clouddn.com/20170104148352139069703.jpg?imageView2/0/format/jpg" alt="jpg"><br> 修改后<br> <img src="http://ofi52yvuh.bkt.clouddn.com/20170106148367165339412.jpg?imageView2/0/format/jpg" alt="jpg"></li>
+<li><code>string.xml</code><br> 宿主<code>app</code><br> <code>&lt;string name=&quot;main&quot;&gt;app.main&lt;/string&gt;</code><br> <code>app.main</code><br> <code>&lt;string name=&quot;main&quot;&gt;主模块&lt;/string&gt;</code><br> <code>app.main</code>设置<code>toolbar</code> <code>mToolbar.setTitle(getString(R.string.main));</code><br> 之前运行的结果<br> <img src="http://ofi52yvuh.bkt.clouddn.com/20170106148367165339412.jpg?imageView2/0/format/jpg" alt="jpg"><br> 修改后<br> <img src="http://ofi52yvuh.bkt.clouddn.com/20170106148367223576658.jpg?imageView2/0/format/jpg" alt="jpg"></li>
+<li><code>layout.xml</code>，<code>.png</code> 这个还没测 🤣，不过不影响我下面说明的东西</li>
+</ol>
+<p>你会发现虽然<strong>名字</strong>冲突了，但是并没有影响我们使用，并且而且真是我们想要的结果，不需要插件开发者设置前缀，做到了对开发者的透明，真实流掰，原理我建议你好好读一下 <a href="https://github.com/wequick/Small/wiki/Android-dynamic-load-resources" target="_blank" rel="external">Dynamic load resources</a></p>
+<p>我简单说下原因<br>我们名字虽然冲突了，但是在程序运行时，我们是使用的是 <code>R.string.main</code>,编译后这会被替换为一个自动生成的<code>int</code>值 <code>public static final int main=0x7f070025;</code>运行时不冲突只需要这个<code>int</code>值不冲突就可以了，这个就是<code>Small</code>工具给我们做的事情，在编译的二进制文件中对资源文件做了区分，还是好好看看前边推荐的文档就好</p>
+<p>先到这里😋 <a href="https://github.com/MaYunFei/SmallDemo" target="_blank" rel="external">GitHub 代码地址</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Small/" rel="tag"># Small</a>
+          
+            <a href="/tags/插件化/" rel="tag"># 插件化</a>
+          
+            <a href="/tags/Android进阶/" rel="tag"># Android进阶</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/30/Mac-下Pthyon卸载/" rel="next" title="Mac 下Pthyon卸载">
+                <i class="fa fa-chevron-left"></i> Mac 下Pthyon卸载
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/10/Small-插件化使用-3-多个页面跳转/" rel="prev" title="Small 插件化使用(3)多个页面跳转">
+                Small 插件化使用(3)多个页面跳转 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/"
+     data-title="Small 插件化使用(2)创建lib.network,lib.style"
+     data-content=""
+     data-url="http://MaYunFei.github.io/2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/"
+           data-title="Small 插件化使用(2)创建lib.network,lib.style" data-url="http://MaYunFei.github.io/2017/01/06/Small-插件化使用-2-创建lib-network-lib-style/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="YunFei" />
+          <p class="site-author-name" itemprop="name">YunFei</p>
+          <p class="site-description motion-element" itemprop="description">理想主义程序猿，时而严肃狗，时而段子手。年少轻狂，口无遮拦</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MaYunFei" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mayunfei6" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yunfei9958" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Library-创建"><span class="nav-number">1.</span> <span class="nav-text">Library 创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与宿主APP-关联"><span class="nav-number">2.</span> <span class="nav-text">与宿主APP 关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Library"><span class="nav-number">3.</span> <span class="nav-text">使用 Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源冲突？"><span class="nav-number">4.</span> <span class="nav-text">资源冲突？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YunFei</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"mayunfei"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
